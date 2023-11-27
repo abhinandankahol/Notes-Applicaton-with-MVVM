@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.AddNotes">
+
+
+    <EditText
+        android:id="@+id/notesTitle"
+        style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_margin="10dp"
+        android:gravity="center_vertical"
+        android:hint="Title"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/notesSubTitle"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:gravity="center_vertical"
+        android:hint="Sub Title"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@+id/notesTitle"
+        app:layout_constraintStart_toStartOf="@+id/notesTitle"
+        app:layout_constraintTop_toBottomOf="@+id/notesTitle" />
+
+    <EditText
+        android:id="@+id/notesContent"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:hint="Content"
+        android:inputType="textMultiLine"
+        app:layout_constraintEnd_toEndOf="@+id/notesSubTitle"
+        app:layout_constraintStart_toStartOf="@+id/notesSubTitle"
+        app:layout_constraintTop_toBottomOf="@+id/notesSubTitle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Add Notes"
+        app:layout_constraintEnd_toEndOf="@+id/notesContent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/notesContent"
+        app:layout_constraintTop_toBottomOf="@+id/notesContent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

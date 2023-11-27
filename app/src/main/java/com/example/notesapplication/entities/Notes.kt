@@ -6,10 +6,10 @@ import java.io.Serializable
 
 @Entity(tableName = "notes_table")
 class Notes(
-@PrimaryKey(autoGenerate = true)
-    var id : Int ?=null,
-    var titleNotes: String = "",
-    var subtitleNotes: String = "",
-    var detailedNotes: String = "",
+    @PrimaryKey(autoGenerate = true)
+    var id: Int? = null,
+    var titleNotes: String,
+    var subtitleNotes: String,
+    var detailedNotes: String,
 
     ) : Serializable

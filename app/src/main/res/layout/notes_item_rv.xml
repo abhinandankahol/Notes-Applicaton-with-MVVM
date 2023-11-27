@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/notesTitle"
+            style="@style/ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_margin="10dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/notesSubTitle"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="Sub Title"
+            app:layout_constraintEnd_toEndOf="@+id/notesTitle"
+            app:layout_constraintStart_toStartOf="@+id/notesTitle"
+            app:layout_constraintTop_toBottomOf="@+id/notesTitle" />
+
+        <TextView
+            android:id="@+id/notesContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:inputType="textMultiLine"
+            android:text="Content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/notesSubTitle"
+            app:layout_constraintStart_toStartOf="@+id/notesSubTitle"
+            app:layout_constraintTop_toBottomOf="@+id/notesSubTitle" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
