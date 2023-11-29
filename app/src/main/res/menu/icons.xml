@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Developer's Contact">
+        <menu>
+            <item
+                android:id="@+id/link"
+                android:icon="@drawable/linkdein"
+                android:title="Linkedin"
+                />
+
+            <item
+                android:id="@+id/whastapp"
+                android:icon="@drawable/whatsapp"
+                android:title="WhatsApp" />
+        </menu>
+
+    </item>
+
+
+</menu>

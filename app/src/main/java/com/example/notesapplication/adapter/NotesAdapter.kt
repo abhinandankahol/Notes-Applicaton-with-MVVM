@@ -4,10 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.example.notesapplication.R
 import com.example.notesapplication.databinding.NotesItemRvBinding
 import com.example.notesapplication.entities.Notes
 import com.example.notesapplication.ui.AddNotes
+import java.util.Collections
 
 class NotesAdapter(var context: Context, var notesList: ArrayList<Notes>) :
     RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
@@ -25,14 +28,31 @@ class NotesAdapter(var context: Context, var notesList: ArrayList<Notes>) :
     override fun onBindViewHolder(holder: NotesViewHolder, position: Int) {
         val notesPosition = notesList[position]
         holder.binding.notesTitle.text = notesPosition.titleNotes
-        holder.binding.notesSubTitle.text = notesPosition.subtitleNotes
         holder.binding.notesContent.text = notesPosition.detailedNotes
 
-        holder.itemView.setOnClickListener {
+        val customColors = intArrayOf(
+            ContextCompat.getColor(context, R.color.colour1),
+            ContextCompat.getColor(context, R.color.colour2),
+            ContextCompat.getColor(context, R.color.colour3),
+            ContextCompat.getColor(context, R.color.colour4),
+            ContextCompat.getColor(context, R.color.colour5),
+            ContextCompat.getColor(context, R.color.colour6)
+
+        )
+
+
+        val color = customColors[position % customColors.size]
+        holder.binding.constraintLay.setBackgroundColor(color)
+
+
+
+        holder.binding.notesTitle.setOnClickListener {
             val intent = Intent(context, AddNotes::class.java)
             intent.putExtra("MODE", 2).putExtra("oldNotes", notesPosition)
             context.startActivity(intent)
 
         }
     }
+
+
 }
