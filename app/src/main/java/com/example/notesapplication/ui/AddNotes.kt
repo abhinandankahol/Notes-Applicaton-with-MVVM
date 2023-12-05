@@ -71,6 +71,7 @@ class AddNotes : AppCompatActivity() {
     }
 
     fun addNotes() {
+
         notes = Notes(
             null,
             titleNotes = binding.notesTitle.text.toString(),
@@ -85,7 +86,6 @@ class AddNotes : AppCompatActivity() {
             notes.id,
             titleNotes = binding.notesTitle.text.toString(),
             detailedNotes = binding.notesContent.text.toString()
-
         )
         notesViewModel.updateNotes(notes)
         finish()

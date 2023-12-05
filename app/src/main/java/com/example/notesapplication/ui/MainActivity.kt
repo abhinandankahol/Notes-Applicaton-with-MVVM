@@ -90,16 +90,13 @@ class MainActivity : AppCompatActivity() {
                         }
                         builder.setNegativeButton("No") { dialog, which ->
                             adapter.notifyItemChanged(position);
-                            // swipedPosition = -1
+
                             dialog.dismiss()
-                            // mainActivityViewModel.readContact()
                         }
 
                         val alertDialog = builder.create()
                         alertDialog.show()
 
-
-                        //adapter.notifyDataSetChanged()
                     }
                 }
 
@@ -126,7 +123,7 @@ class MainActivity : AppCompatActivity() {
             val profileUrl: String
             when (it.itemId) {
                 R.id.link -> {
-                    profileUrl = "https://www.linkedin.com/in/abhinandan-259057263"
+                    profileUrl = "https://www.linkedin.com/in/abhinandankahol"
 
                     val intent = Intent(Intent.ACTION_VIEW, Uri.parse(profileUrl))
                     intent.setPackage("com.linkedin.android")
@@ -143,7 +140,6 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.whastapp -> {
                     val phoneNum = "+91 7018918026"
-                    val message = "Hii Abhinandan"
 
                     openWhatsAppChat(this, phoneNum)
 
