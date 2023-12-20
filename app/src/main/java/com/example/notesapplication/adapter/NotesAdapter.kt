@@ -10,7 +10,6 @@ import com.example.notesapplication.R
 import com.example.notesapplication.databinding.NotesItemRvBinding
 import com.example.notesapplication.entities.Notes
 import com.example.notesapplication.ui.AddNotes
-import java.util.Collections
 
 class NotesAdapter(var context: Context, var notesList: ArrayList<Notes>) :
     RecyclerView.Adapter<NotesAdapter.NotesViewHolder>() {
@@ -20,6 +19,13 @@ class NotesAdapter(var context: Context, var notesList: ArrayList<Notes>) :
         val binding = NotesItemRvBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return NotesViewHolder(binding)
     }
+
+    fun newList(filteredList: ArrayList<Notes>) {
+        this.notesList = filteredList
+        notifyDataSetChanged()
+
+    }
+
 
     override fun getItemCount(): Int {
         return notesList.size
@@ -36,7 +42,13 @@ class NotesAdapter(var context: Context, var notesList: ArrayList<Notes>) :
             ContextCompat.getColor(context, R.color.colour3),
             ContextCompat.getColor(context, R.color.colour4),
             ContextCompat.getColor(context, R.color.colour5),
-            ContextCompat.getColor(context, R.color.colour6)
+            ContextCompat.getColor(context, R.color.colour6),
+            ContextCompat.getColor(context, R.color.colour7),
+            ContextCompat.getColor(context, R.color.colour8),
+            ContextCompat.getColor(context, R.color.colour9),
+            ContextCompat.getColor(context, R.color.colour10),
+            ContextCompat.getColor(context, R.color.colour11),
+            ContextCompat.getColor(context, R.color.colour12)
 
         )
 
@@ -52,6 +64,7 @@ class NotesAdapter(var context: Context, var notesList: ArrayList<Notes>) :
             context.startActivity(intent)
 
         }
+
     }
 
 

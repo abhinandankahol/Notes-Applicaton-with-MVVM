@@ -1,8 +1,9 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.NotesApplication" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">#FF3B3B3B</item>
+        -->
     </style>
 
     <style name="Theme.NotesApplication" parent="Base.Theme.NotesApplication" />
@@ -10,4 +11,14 @@
     <style name="CustomAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/dialog_bg</item>
     </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Customize the text color -->
+        <item name="android:editTextColor">@color/white</item>
+        <!-- Customize the hint text color -->
+        <item name="android:textColorHint">@color/white</item>
+        <!-- Customize the close button color -->
+
+    </style>
+
 </resources>

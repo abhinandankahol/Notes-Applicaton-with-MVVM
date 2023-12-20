@@ -7,8 +7,6 @@
     android:background="#252525"
     tools:context=".ui.MainActivity">
 
-
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="0dp"
@@ -19,10 +17,10 @@
         android:text="Notes"
         android:textColor="@color/white"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
+        app:layout_constraintBottom_toBottomOf="@+id/searchView"
+        app:layout_constraintEnd_toStartOf="@+id/searchView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/searchView"
         tools:ignore="HardcodedText" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -37,8 +35,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintTop_toBottomOf="@+id/searchView"
         tools:listitem="@layout/notes_item_rv" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -48,6 +45,9 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="16dp"
         android:clickable="true"
+        android:background="@drawable/button_background"
+        style="@style/Widget.Material3.Button.Icon"
+        android:importantForAccessibility="no"
         android:paddingStart="4dp"
         android:paddingBottom="4dp"
         android:src="@drawable/add_icon"
@@ -55,21 +55,26 @@
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:importantForAccessibility="no"
         tools:ignore="RtlSymmetry" />
 
-    <ImageButton
-        android:id="@+id/imageButton"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/searchView"
+        style="@style/Widget.AppCompat.SearchView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/button_background"
+        android:background="@drawable/searchbar_bg"
+        android:theme="@style/SearchViewStyle"
+        android:visibility="visible"
+        app:closeIcon="@drawable/icon_cross"
         app:layout_constraintBottom_toBottomOf="@+id/info"
         app:layout_constraintEnd_toStartOf="@+id/info"
         app:layout_constraintTop_toTopOf="@+id/info"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/search_icon"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintVertical_bias="1.0"
+        app:queryBackground="@android:color/transparent"
+        app:searchHintIcon="@drawable/search_icon"
+        app:searchIcon="@drawable/search_icon"
+        tools:ignore="RtlSymmetry" />
 
     <ImageButton
         android:id="@+id/info"
@@ -87,10 +92,10 @@
         android:id="@+id/empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="No Notes here yet..."
-        android:textColor="@color/white"
-        android:textAlignment="center"
         android:fontFamily="@font/nunito_semibold"
+        android:text="No Notes here yet..."
+        android:textAlignment="center"
+        android:textColor="@color/colour8"
         android:textSize="20sp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="@+id/notesRV"
@@ -98,7 +103,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/notesRV"
         tools:ignore="HardcodedText" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

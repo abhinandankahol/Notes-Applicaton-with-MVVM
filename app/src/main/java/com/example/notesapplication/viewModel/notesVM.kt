@@ -1,24 +1,23 @@
 package com.example.notesapplication.viewModel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.notesapplication.database.NotesDatabase
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.notesapplication.entities.Notes
 import com.example.notesapplication.repository.NotesRepo
+import kotlinx.coroutines.launch
 
-class notesVM(application: Application) : AndroidViewModel(application) {
+class notesVM(private val repository: NotesRepo) : ViewModel() {
 
-    val repositoty: NotesRepo
 
-    init {
-        val dao = NotesDatabase.notes_database(application).dao()
-        repositoty = NotesRepo(dao)
+    fun createNote(notes: Notes) = viewModelScope.launch { repository.createNote(notes) }
+    fun readNotes(): LiveData<List<Notes>> = repository.readNote()
+    fun updateNotes(notes: Notes) = viewModelScope.launch { repository.updateNote(notes) }
+    fun deleteNote(notes: Notes) = viewModelScope.launch { repository.deleteNote(notes) }
+
+    fun searchNotes(query: String): LiveData<List<Notes>> {
+        return repository.searchNotes(query)
     }
 
-    fun createNote(notes: Notes) = repositoty.createNote(notes)
-    fun readNotes(): LiveData<List<Notes>> = repositoty.readNote()
-    fun updateNotes(notes: Notes) = repositoty.updateNote(notes)
-    fun deleteNote(notes: Notes) = repositoty.deleteNote(notes)
 
 }

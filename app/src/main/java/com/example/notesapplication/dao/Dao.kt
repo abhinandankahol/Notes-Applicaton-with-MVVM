@@ -22,4 +22,7 @@ interface Dao {
 
     @Delete
     fun deleteNotes(notes: Notes)
+
+    @Query("SELECT * FROM notes_table WHERE titleNotes LIKE :searchQuery")
+    fun searchNotes(searchQuery: String): LiveData<List<Notes>>
 }

@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.PopupMenu
+import android.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -16,42 +17,75 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notesapplication.R
 import com.example.notesapplication.adapter.NotesAdapter
+import com.example.notesapplication.database.NotesDatabase
 import com.example.notesapplication.databinding.ActivityMainBinding
 import com.example.notesapplication.entities.Notes
+import com.example.notesapplication.repository.NotesRepo
 import com.example.notesapplication.viewModel.notesVM
+import com.example.notesapplication.viewmodelfactory.notesVMFactory
 
 
 class MainActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var notesList: ArrayList<Notes>
+    private lateinit var searchView: androidx.appcompat.widget.SearchView
     private lateinit var adapter: NotesAdapter
     private lateinit var viewModel: notesVM
+
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
+
+
+
+
+        val dao = NotesDatabase.notes_database(applicationContext).dao()
+        val repo = NotesRepo(dao)
+
         binding.info.setOnClickListener {
             showPopUpMenu(it)
 
         }
+        searchView = findViewById(R.id.searchView)
+        searchView.clearFocus()
+        searchView.queryHint = "Search your notes here.."
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                filterList(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+
+
+        })
+
+
 
 
         binding.floatingActionButton.setOnClickListener {
             startActivity(Intent(this@MainActivity, AddNotes::class.java))
         }
 
-        viewModel = ViewModelProvider(this)[notesVM::class.java]
+        viewModel = ViewModelProvider(this, notesVMFactory(repo))[notesVM::class.java]
         viewModel.readNotes().observeForever {
             notesList.clear()
-
             notesList.addAll(it)
             adapter.notifyDataSetChanged()
             if (notesList.isEmpty()) {
                 binding.notesRV.visibility = View.INVISIBLE
+                binding.searchView.visibility = View.INVISIBLE
                 binding.empty.visibility = View.VISIBLE
             } else {
                 binding.notesRV.visibility = View.VISIBLE
+                binding.searchView.visibility = View.VISIBLE
                 binding.empty.visibility = View.GONE
             }
         }
@@ -80,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                         builder.setMessage("Do you want to delete ?")
                         builder.setTitle("Alert !")
                         builder.setCancelable(false)
-                        builder.setPositiveButton("Yes") { dialog, which ->
+                        builder.setPositiveButton("Yes") { _, _ ->
                             notesList.removeAt(position)
                             adapter.notifyItemRemoved(position)
                             viewModel.deleteNote(notesPosition)
@@ -88,8 +122,8 @@ class MainActivity : AppCompatActivity() {
                                 .show()
 
                         }
-                        builder.setNegativeButton("No") { dialog, which ->
-                            adapter.notifyItemChanged(position);
+                        builder.setNegativeButton("No") { dialog, _ ->
+                            adapter.notifyItemChanged(position)
 
                             dialog.dismiss()
                         }
@@ -115,6 +149,20 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    private fun filterList(newText: String?) {
+        val filteredList = ArrayList<Notes>()
+        for (i in notesList) {
+            if (i.titleNotes.contains(newText.orEmpty(), ignoreCase = true)) {
+                filteredList.add(i)
+            }
+
+        }
+        adapter.newList(filteredList)
+
+
+    }
+
 
     private fun showPopUpMenu(view: View) {
         val popUpMenu = PopupMenu(this, view)
@@ -172,5 +220,8 @@ class MainActivity : AppCompatActivity() {
 
 
 }
+
+
+
 
 
